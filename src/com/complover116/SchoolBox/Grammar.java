@@ -117,6 +117,4 @@ public class Grammar extends Activity {
         wrngans.setText(wrongans+"");
     	}
     }
-    public void setupQuestions() {
-}
 }
