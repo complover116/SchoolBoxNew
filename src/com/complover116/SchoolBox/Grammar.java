@@ -31,7 +31,6 @@ public class Grammar extends Activity {
     	pans1 = new String[questnum+3];
     	pans2 = new String[questnum+3];
     	pans3 = new String[questnum+3];
-        setupQuestions();
         setContentView(R.layout.activity_grammar);
         TextView qt = (TextView) this.findViewById(R.id.Question);
         TextView textView1 = (TextView) this.findViewById(R.id.textView1);
