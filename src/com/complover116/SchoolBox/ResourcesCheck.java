@@ -75,6 +75,7 @@ public class ResourcesCheck extends Activity {
 			        CQVar3 = line;
 			        DataLine = 1;
 			        Qc ++;
+			        //TODO Fix 2 appearing at CQVar3
 			        if(line.equalsIgnoreCase("1")) {
 			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 1);
 			        }
