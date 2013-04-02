@@ -72,7 +72,6 @@ public class ResourcesCheck extends Activity {
 			        DataLine = 6;
 		        break;
 		        case 6:
-			        CQVar3 = line;
 			        DataLine = 1;
 			        Qc ++;
 			        //TODO Fix 2 appearing at CQVar3
