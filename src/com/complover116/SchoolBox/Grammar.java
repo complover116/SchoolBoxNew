@@ -116,4 +116,8 @@ public class Grammar extends Activity {
         wrngans.setText(wrongans+"");
     	}
     }
+    public void GoToMainMenu() {
+    	Intent GTMMI = new Intent(this.class, MainMenu.class);
+    	startActivity(GTMMI);
+    }
 }
