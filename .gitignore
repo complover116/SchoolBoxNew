@@ -1,4 +1,3 @@
-/bin/*
+SchoolBoxNew/bin/*
+SchoolBoxNew/gen/*
 
-*.apk
-*.class
