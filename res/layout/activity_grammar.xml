@@ -7,7 +7,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="461dp" >
 
         <TextView
             android:id="@+id/Question"
@@ -110,6 +110,14 @@
             android:onClick="nextStep"
             android:text="          " />
 
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="GoToMainMenu"
+            android:text="Вернуться в главное меню" />
     </RelativeLayout>
 
 </ScrollView>

@@ -1,3 +1,5 @@
-SchoolBoxNew/bin/*
-SchoolBoxNew/gen/*
+\bin\*
+\gen\*
 
+*.apk
+*.class
