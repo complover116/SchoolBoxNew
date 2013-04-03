@@ -25,6 +25,8 @@ public class GrammarTestResult extends Activity {
 
 	}
     public void onBackPressed() {
+    }
+    public void GoToMainMenu() {
     	Grammar.wrongans = 0;
     	Intent samiykrutoy = new Intent(this, MainMenu.class);
     	startActivity(samiykrutoy);
