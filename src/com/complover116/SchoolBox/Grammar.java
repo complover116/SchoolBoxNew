@@ -52,9 +52,7 @@ public class Grammar extends Activity {
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
     }
     public void onBackPressed() {
-    	this.wrongans = 0;
-    	Intent samiykrutoy = new Intent(this, MainMenu.class);
-    	startActivity(samiykrutoy);
+    	
     }
     public void nextStep(View view) {
     	Button but = (Button) view;
@@ -117,7 +115,8 @@ public class Grammar extends Activity {
     	}
     }
     public void GoToMainMenu() {
-    	Intent GTMMI = new Intent(this.class, MainMenu.class);
-    	startActivity(GTMMI);
+	this.wrongans = 0;
+    	Intent samiykrutoy = new Intent(this, MainMenu.class);
+    	startActivity(samiykrutoy);
     }
 }
