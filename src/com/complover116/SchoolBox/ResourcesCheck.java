@@ -104,14 +104,6 @@ public class ResourcesCheck extends Activity {
 		Log.d("STATUS", "Checked resources:" + text);
 		Intent intik = new Intent(this, MainMenu.class);
 		startActivity(intik);
-		ImageView androidIV = (ImageView) findViewById(R.id.tstIV);
-		View vi = findViewById(R.id.Spinner);
-		androidIV.setBackgroundResource(R.drawable.tstanim);
-		AnimationDrawable androidAnimation = (AnimationDrawable) androidIV
-				.getBackground();
-		androidAnimation.start();
-		Log.d("STATUS", "YAY");
-        
 	}
 
 	@Override
