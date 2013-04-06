@@ -18,6 +18,7 @@ int uf = 1;
 long myDownloadReference;
 AlertDialog dialog;
 MediaPlayer mediaPlayer;
+MediaPlayer ButtonSound;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,7 @@ MediaPlayer mediaPlayer;
 		VideoView VV = (VideoView)findViewById(R.id.VidVi);
 		VV.setVideoURI(Uri.parse("android.resource://com.complover116.SchoolBox/"+R.raw.preview));
 		VV.start();
-		
+		ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
     }
 
     @Override
@@ -41,6 +42,7 @@ MediaPlayer mediaPlayer;
     
     public void buttonpress(View view){
     	mediaPlayer.stop();
+    	ButtonSound.start();
     	Intent intent = new Intent(this, Grammar.class);
     	startActivity(intent);
     }

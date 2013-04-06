@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 public class Grammar extends Activity {
 	int[] rightans;
@@ -23,8 +21,10 @@ public class Grammar extends Activity {
 	static MediaPlayer mediaPlayer;
 	static MediaPlayer yesmp;
 	static MediaPlayer nomp;
+	static MediaPlayer ButtonSound;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	
         super.onCreate(savedInstanceState);
     	rightans = new int[questnum+2];
     	quests = new String[questnum+3];
@@ -49,12 +49,14 @@ public class Grammar extends Activity {
         mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
         yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
         nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
+        ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
     }
     public void onBackPressed() {
     	
     }
     public void nextStep(View view) {
+    	ButtonSound.start();
     	Button but = (Button) view;
     	switch (but.getId()) {
     	case(R.id.ans1):
@@ -114,7 +116,9 @@ public class Grammar extends Activity {
         wrngans.setText(wrongans+"");
     	}
     }
-    public void GoToMainMenu() {
+    public void GoToMainMenu(View poot) {
+    	ButtonSound.start();
+    	mediaPlayer.stop();
 	this.wrongans = 0;
     	Intent samiykrutoy = new Intent(this, MainMenu.class);
     	startActivity(samiykrutoy);
