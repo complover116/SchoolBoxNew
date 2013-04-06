@@ -1,3 +1,3 @@
 SchoolBoNew
 ============
-Testie test Sklizie-skliz
+Кнопочки работают?
