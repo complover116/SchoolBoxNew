@@ -23,12 +23,10 @@ MediaPlayer ButtonSound;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main_menu);
-		mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lal);
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
 		VideoView VV = (VideoView)findViewById(R.id.VidVi);
 		VV.setVideoURI(Uri.parse("android.resource://com.complover116.SchoolBox/"+R.raw.preview));
 		VV.start();
-		ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
     }
 
     @Override
