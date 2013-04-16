@@ -43,6 +43,10 @@ public class ResourcesCheck extends Activity {
         String CQVar2 = null;
         String CQVar3 = null;
         String CQVar4 = null;
+        Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
+        Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
+        Grammar.nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
+        Grammar.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
 		try {
 		    BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line;
