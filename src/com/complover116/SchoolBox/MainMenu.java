@@ -17,8 +17,8 @@ static int qnum;
 int uf = 1;
 long myDownloadReference;
 AlertDialog dialog;
-MediaPlayer mediaPlayer;
-MediaPlayer ButtonSound;
+static MediaPlayer mediaPlayer;
+static MediaPlayer ButtonSound;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
