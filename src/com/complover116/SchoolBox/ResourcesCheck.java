@@ -26,7 +26,9 @@ public class ResourcesCheck extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent intent = new Intent(this, MainMenu.class);
+		Log.d("STATUS", "Loading Screeen image...");
+		setContentView(R.layout.activity_resources_check);
+		Log.d("STATUS", "Loaded screen image!");
 		//Find the directory for the SD Card using the API
 		//*Don't* hardcode "/sdcard"
 		File sdcard = Environment.getExternalStorageDirectory();
@@ -44,11 +46,20 @@ public class ResourcesCheck extends Activity {
         String CQVar3 = null;
         String CQVar4 = null;
         Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
+        Log.d("STATUS", "Fud loaded");
         Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
+        Log.d("STATUS", "Yes loaded");
         Grammar.nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
+        Log.d("STATUS", "No loaded");
         Grammar.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
+        Log.d("STATUS", "Button loaded");
         MainMenu.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lal);
+        Log.d("STATUS", "Lal loaded");
         MainMenu.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
+        //TODO fix sounds loading twice!
+        Log.d("STATUS", "Button loaded TODO Fix loading twice!" + text);
+        GrammarTestResult.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
+        Log.d("STATUS", "Button loaded TODO Fix loading twice!" + text);
 		try {
 		    BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line;
@@ -106,7 +117,6 @@ public class ResourcesCheck extends Activity {
 		}
         
         MainMenu.qnum = Qc;
-		setContentView(R.layout.activity_resources_check);
 		Log.d("STATUS", "Checked resources:" + text);
 		Intent intik = new Intent(this, MainMenu.class);
 		startActivity(intik);
