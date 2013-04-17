@@ -20,7 +20,6 @@ public class GrammarTestResult extends Activity {
     	QR.setText(MainMenu.qnum - Grammar.wrongans+"/"+MainMenu.qnum);
     	TextView PRC = (TextView)findViewById(R.id.PRC);
     	PRC.setText(((MainMenu.qnum - Grammar.wrongans)*100/MainMenu.qnum)+"%");
-    	ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
