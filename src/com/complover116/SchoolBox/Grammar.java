@@ -46,10 +46,6 @@ public class Grammar extends Activity {
         textView4.setText(MainMenu.quests[cquest].pans4);
         ptw.setText(cquest+"/"+questnum);
         wrngans.setText(wrongans+"");
-        mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
-        yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
-        nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
-        ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
     }
     public void onBackPressed() {
