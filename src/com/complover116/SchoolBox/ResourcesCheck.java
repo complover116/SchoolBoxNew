@@ -38,6 +38,7 @@ public class ResourcesCheck extends Activity {
         String CQVar3 = null;
         String CQVar4 = null;
         String type = null;
+        int typ = null;
 		try {
 		    BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line;
@@ -68,23 +69,37 @@ public class ResourcesCheck extends Activity {
 		        break;
 		        case 6:
 			        type = line;
+			        if(type.equalsIgnoreCase("1")) {
+			        typ = 1;
+			        }
+			        else if(type.equalsIgnoreCase("2")) {
+			        typ = 2;
+			        }
+			        else if(type.equalsIgnoreCase("3")) {
+			        typ = 3;
+			        }else if(type.equalsIgnoreCase("4")) {
+			        typ = 4;
+			        }else {
+			        	Log.e("InRes", "Type Failure");
+			        }
 			        DataLine = 7;
 		        break;
 		        case 7:
 			        DataLine = 1;
 			        Qc ++;
 			        if(line.equalsIgnoreCase("1")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 1, type);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 1, typ);
 			        }
 			        else if(line.equalsIgnoreCase("2")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 2, type);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 2, typ);
 			        }
 			        else if(line.equalsIgnoreCase("3")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 3, type);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 3, typ);
 			        }else if(line.equalsIgnoreCase("4")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 4, type);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 4, typ);
 			        }else {
 			        	Log.e("InRes", "CQAns Failure");
+			        	Qc --;
 			        }
 		        break;
 		        default:
