@@ -29,14 +29,8 @@ public class ResourcesCheck extends Activity {
 		Log.d("STATUS", "Loading Screeen image...");
 		setContentView(R.layout.activity_resources_check);
 		Log.d("STATUS", "Loaded screen image!");
-		//Find the directory for the SD Card using the API
-		//*Don't* hardcode "/sdcard"
 		File sdcard = Environment.getExternalStorageDirectory();
-
-		//Get the text file
 		File file = new File(sdcard,"Questions.txt");
-
-		//Read text from file
 		StringBuilder text = new StringBuilder();
         int Qc = 0;
         int DataLine = 1;
@@ -45,6 +39,8 @@ public class ResourcesCheck extends Activity {
         String CQVar2 = null;
         String CQVar3 = null;
         String CQVar4 = null;
+        String type = null;
+        int typ = null;
         Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
         Log.d("STATUS", "Fud loaded");
         Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
@@ -89,21 +85,38 @@ public class ResourcesCheck extends Activity {
 			        DataLine = 6;
 		        break;
 		        case 6:
+	type = line;
+              if(type.equalsIgnoreCase("1")) {
+              typ = 1;
+              }
+              else if(type.equalsIgnoreCase("2")) {
+              typ = 2;
+              }
+              else if(type.equalsIgnoreCase("3")) {
+              typ = 3;
+              }else if(type.equalsIgnoreCase("4")) {
+              typ = 4;
+              }else {
+                Log.e("InRes", "Type Failure");
+              }
+              DataLine = 7;
+            break;
+            case 7:
 			        DataLine = 1;
 			        Qc ++;
-			        //TODO Fix 2 appearing at CQVar3
 			        if(line.equalsIgnoreCase("1")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 1);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 1, typ);
 			        }
 			        else if(line.equalsIgnoreCase("2")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 2);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 2, typ);
 			        }
 			        else if(line.equalsIgnoreCase("3")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 3);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 3, typ);
 			        }else if(line.equalsIgnoreCase("4")) {
-			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 4);
+			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 4, typ);
 			        }else {
 			        	Log.e("InRes", "CQAns Failure");
+			        	Qc --;
 			        }
 		        break;
 		        default:
