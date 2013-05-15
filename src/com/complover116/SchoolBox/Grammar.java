@@ -22,6 +22,10 @@ public class Grammar extends Activity {
 	static MediaPlayer yesmp;
 	static MediaPlayer nomp;
 	static MediaPlayer ButtonSound;
+	static int ATypeCount = 0;
+        static int BTypeCount = 0;
+        static int CTypeCount = 0;
+        static int DTypeCount = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	
@@ -59,6 +63,20 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=1){
     		wrongans++;	
     		nomp.start();
+           switch(MainMenu.quests[cquest].rans.type) {
+          case 1:
+          ATypeCount ++;
+          break;
+         case 2:
+          BTypeCount ++;
+          break;
+          case 3:
+          CTypeCount ++;
+          break;
+          case 4:
+          DTypeCount ++;
+          break;
+        }
     		} else {
     			yesmp.start();
     		}
@@ -67,6 +85,20 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=2){
     		wrongans++;	
     		nomp.start();
+    		           switch(MainMenu.quests[cquest].rans.type) {
+          case 1:
+          ATypeCount ++;
+          break;
+         case 2:
+          BTypeCount ++;
+          break;
+          case 3:
+          CTypeCount ++;
+          break;
+          case 4:
+          DTypeCount ++;
+          break;
+        }
     		} else {
     			yesmp.start();
     		}
@@ -75,6 +107,20 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=3){
     		wrongans++;	
     		nomp.start();
+    		           switch(MainMenu.quests[cquest].rans.type) {
+          case 1:
+          ATypeCount ++;
+          break;
+         case 2:
+          BTypeCount ++;
+          break;
+          case 3:
+          CTypeCount ++;
+          break;
+          case 4:
+          DTypeCount ++;
+          break;
+        }
     		} else {
     			yesmp.start();
     		}
@@ -83,6 +129,20 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=4){
     		wrongans++;	
     		nomp.start();
+    		           switch(MainMenu.quests[cquest].rans.type) {
+          case 1:
+          ATypeCount ++;
+          break;
+         case 2:
+          BTypeCount ++;
+          break;
+          case 3:
+          CTypeCount ++;
+          break;
+          case 4:
+          DTypeCount ++;
+          break;
+        }
     		} else {
     			yesmp.start();
     		}
