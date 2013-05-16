@@ -63,7 +63,7 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=1){
     		wrongans++;	
     		nomp.start();
-           switch(MainMenu.quests[cquest].rans.type) {
+           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
           break;
@@ -85,7 +85,7 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=2){
     		wrongans++;	
     		nomp.start();
-    		           switch(MainMenu.quests[cquest].rans.type) {
+    		           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
           break;
@@ -107,7 +107,7 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=3){
     		wrongans++;	
     		nomp.start();
-    		           switch(MainMenu.quests[cquest].rans.type) {
+    		           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
           break;
@@ -129,7 +129,7 @@ public class Grammar extends Activity {
     		if(MainMenu.quests[cquest].rans!=4){
     		wrongans++;	
     		nomp.start();
-    		           switch(MainMenu.quests[cquest].rans.type) {
+    		           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
           break;

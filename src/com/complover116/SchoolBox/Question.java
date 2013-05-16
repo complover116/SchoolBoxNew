@@ -16,6 +16,6 @@ public class Question {
 		pans3 = pan3;
 		pans4 = pan4;
 		rans = rians;
-		type = typ
+		type = typ;
 	}
 }

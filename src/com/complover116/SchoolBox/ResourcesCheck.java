@@ -40,7 +40,7 @@ public class ResourcesCheck extends Activity {
         String CQVar3 = null;
         String CQVar4 = null;
         String type = null;
-        int typ = null;
+        int typ = 0;
         Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
         Log.d("STATUS", "Fud loaded");
         Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
