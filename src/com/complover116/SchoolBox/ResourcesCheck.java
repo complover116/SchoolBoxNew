@@ -97,7 +97,7 @@ public class ResourcesCheck extends Activity {
               }else if(type.equalsIgnoreCase("4")) {
               typ = 4;
               }else {
-                Log.e("InRes", "Type Failure");
+                Log.e("InRes", "Type Failure: Expected a number, got |"+line+"| at Question "+Qc);
               }
               DataLine = 7;
             break;
@@ -115,7 +115,7 @@ public class ResourcesCheck extends Activity {
 			        }else if(line.equalsIgnoreCase("4")) {
 			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 4, typ);
 			        }else {
-			        	Log.e("InRes", "CQAns Failure");
+			        	Log.e("InRes", "CQAns Failure: Expected a number, got |"+line+"| at Question "+Qc);
 			        	Qc --;
 			        }
 		        break;
