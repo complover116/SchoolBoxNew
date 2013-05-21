@@ -33,13 +33,53 @@
         android:text="Prcs"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <MediaController
+	<TextView
+        android:id="@+id/Err2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/QR"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="94dp"
+        android:text="Prcs"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<TextView
+        android:id="@+id/Err1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/QR"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="114dp"
+        android:text="Prcs"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<TextView
+        android:id="@+id/Err3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/QR"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="134dp"
+        android:text="Prcs"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<TextView
+        android:id="@+id/Err4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/QR"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="154dp"
+        android:text="Prcs"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<MediaController
         android:id="@+id/mediaController1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/PRC"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="131dp"
+        android:layout_marginTop="174dp"
         android:layout_toLeftOf="@+id/QR" >
     </MediaController>
 
