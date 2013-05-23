@@ -152,7 +152,7 @@ public class Grammar extends Activity {
     		TextView qt = (TextView) this.findViewById(R.id.Question);
     		qt.setText("DEBUG: Gluk kakoy-to...");
     		qt.setTextColor(Color.rgb(0, 255, 0));
-    		Intent intik = new Intent(this, GrammarTestResult.class);
+    		Intent intik = new Intent(this, GrammarB.class);
     		startActivity(intik);
     	} else {
     	cquest++;
