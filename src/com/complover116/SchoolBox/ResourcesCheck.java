@@ -142,4 +142,7 @@ public class ResourcesCheck extends Activity {
 		getMenuInflater().inflate(R.menu.activity_resources_check, menu);
 		return true;
 	}
+		public void finishirovat() {
+		this.finish();
+	}
 }
