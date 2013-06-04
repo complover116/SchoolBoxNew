@@ -51,10 +51,10 @@ static MediaPlayer ButtonSound;
         public void Quit(View view){
     	mediaPlayer.pause();
     	ButtonSound.start();
-    	ResourcesCheck.finishirovat;
-        Grammar.finishirovat;
-    	GrammarB.finishirovat;
-    	GrammarTestResult.finishirovat;
+    	ResourcesCheck.finishirovat();
+        Grammar.finishirovat();
+    	GrammarB.finishirovat();
+    	GrammarTestResult.finishirovat();
     	this.finish();
     }
 }
