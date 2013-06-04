@@ -19,4 +19,7 @@ public class GrammarB extends Activity {
     public void onBackPressed() {
     	
     }
+        public void finishirovat() {
+		this.finish();
+	}
 }
