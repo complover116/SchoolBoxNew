@@ -169,7 +169,7 @@ public class Grammar extends Activity {
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
         ptw.setText(cquest+"/"+MainMenu.qnum);
-        wrngans.setText("Ошибки"+wrongans+"");
+        wrngans.setText("Ошибки:"+wrongans+"");
     	}
     }
     public void GoToMainMenu(View poot) {
