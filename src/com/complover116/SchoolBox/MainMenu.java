@@ -44,5 +44,8 @@ static MediaPlayer ButtonSound;
     	Intent intent = new Intent(this, Grammar.class);
     	startActivity(intent);
     }
-    
+        @Override
+    public void onBackPressed() {
+      
+    }
 }
