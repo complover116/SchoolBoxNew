@@ -48,4 +48,9 @@ static MediaPlayer ButtonSound;
     public void onBackPressed() {
       
     }
+        public void Quit(View view){
+    	mediaPlayer.pause();
+    	ButtonSound.start();
+    	this.finish();
+    }
 }
