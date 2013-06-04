@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="461dp" >
 
-        <TextView
+       <TextView
             android:id="@+id/Question"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -18,26 +18,6 @@
             android:layout_marginTop="40dp"
             android:text="Question"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:id="@+id/ans2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ans1"
-            android:layout_below="@+id/ans1"
-            android:layout_marginTop="31dp"
-            android:onClick="nextStep"
-            android:text="2" />
-
-        <Button
-            android:id="@+id/ans3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ans2"
-            android:layout_below="@+id/ans2"
-            android:layout_marginTop="42dp"
-            android:onClick="nextStep"
-            android:text="3" />
 
         <TextView
             android:id="@+id/wrongansn"
@@ -59,19 +39,29 @@
             android:id="@+id/textView1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ans1"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/ans1"
+            android:layout_below="@id/Question"
+            android:layout_toLeftOf="@+id/progress"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView4"
+            android:layout_centerHorizontal="true"
+            android:onClick="GoToMainMenu"
+            android:text="Вернуться в главное меню" />
+
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ans2"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/textView1"
+            android:layout_below="@+id/textView3"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/progress"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -79,29 +69,20 @@
             android:id="@+id/textView3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ans3"
             android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/textView2"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/progress"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/ans4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ans3"
-            android:layout_below="@+id/ans3"
-            android:layout_marginTop="52dp"
-            android:onClick="nextStep"
-            android:text="4" />
-
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ans4"
-            android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/textView3"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/progress"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -109,19 +90,38 @@
             android:id="@+id/ans1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/textView1"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/Question"
             android:onClick="nextStep"
             android:text="1" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/ans2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ans4"
-            android:layout_centerHorizontal="true"
-            android:onClick="GoToMainMenu"
-            android:text="Вернуться в главное меню" />
+            android:layout_alignBaseline="@+id/textView2"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_alignParentRight="true"
+            android:onClick="nextStep"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/ans4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/textView4"
+            android:layout_alignParentRight="true"
+            android:onClick="nextStep"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/ans3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/textView3"
+            android:layout_alignParentRight="true"
+            android:onClick="nextStep"
+            android:text="3" />
     </RelativeLayout>
 
 </ScrollView>
