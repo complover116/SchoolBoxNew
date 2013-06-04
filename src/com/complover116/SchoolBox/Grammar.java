@@ -168,7 +168,7 @@ public class Grammar extends Activity {
         textView2.setText(MainMenu.quests[cquest].pans2);
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
-        ptw.setText(cquest+"/"+questnum);
+        ptw.setText(cquest+"/"+MainMenu.qnum);
         wrngans.setText(wrongans+"");
     	}
     }
