@@ -49,7 +49,7 @@ public class Grammar extends Activity {
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
         ptw.setText(cquest+"/"+MainMenu.qnum);
-        wrngans.setText(wrongans+"");
+        wrngans.setText("Ошибки:"+wrongans+"");
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
     }
     public void onBackPressed() {
@@ -169,7 +169,7 @@ public class Grammar extends Activity {
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
         ptw.setText(cquest+"/"+MainMenu.qnum);
-        wrngans.setText(wrongans+"");
+        wrngans.setText("Ошибки"+wrongans+"");
     	}
     }
     public void GoToMainMenu(View poot) {
