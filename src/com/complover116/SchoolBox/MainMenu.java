@@ -48,13 +48,4 @@ static MediaPlayer ButtonSound;
     public void onBackPressed() {
       
     }
-        public void Quit(View view){
-    	mediaPlayer.pause();
-    	ButtonSound.start();
-    	ResourcesCheck.finishirovat();
-        Grammar.finishirovat();
-    	GrammarB.finishirovat();
-    	GrammarTestResult.finishirovat();
-    	this.finish();
-    }
 }
