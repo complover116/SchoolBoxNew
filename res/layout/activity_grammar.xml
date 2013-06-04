@@ -27,7 +27,7 @@
             android:layout_below="@+id/ans1"
             android:layout_marginTop="31dp"
             android:onClick="nextStep"
-            android:text="          " />
+            android:text="2" />
 
         <Button
             android:id="@+id/ans3"
@@ -37,7 +37,7 @@
             android:layout_below="@+id/ans2"
             android:layout_marginTop="42dp"
             android:onClick="nextStep"
-            android:text="          " />
+            android:text="3" />
 
         <TextView
             android:id="@+id/wrongansn"
@@ -61,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ans1"
             android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/ans1"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ans2"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView1"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -79,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ans3"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView2"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -90,7 +93,7 @@
             android:layout_below="@+id/ans3"
             android:layout_marginTop="52dp"
             android:onClick="nextStep"
-            android:text="          " />
+            android:text="4" />
 
         <TextView
             android:id="@+id/textView4"
@@ -98,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/ans4"
             android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView3"
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -108,7 +112,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/Question"
             android:onClick="nextStep"
-            android:text="          " />
+            android:text="1" />
 
         <Button
             android:id="@+id/button1"
