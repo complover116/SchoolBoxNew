@@ -27,7 +27,7 @@ public class GrammarTestResult extends Activity {
 		TextView err3 = (TextView)findViewById(R.id.Err3);
 		err3.setText("Орфографические ошибки:" + Grammar.CTypeCount);
 		TextView err4 = (TextView)findViewById(R.id.Err4);
-		err4.setText("Лексические ошибки::" + Grammar.DTypeCount);
+		err4.setText("Синтаксические ошибки:" + Grammar.DTypeCount);
   }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
