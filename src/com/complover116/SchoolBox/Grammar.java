@@ -179,4 +179,7 @@ public class Grammar extends Activity {
     	Intent samiykrutoy = new Intent(this, MainMenu.class);
     	startActivity(samiykrutoy);
     }
+    	public void finishirovat() {
+		this.finish();
+	}
 }
