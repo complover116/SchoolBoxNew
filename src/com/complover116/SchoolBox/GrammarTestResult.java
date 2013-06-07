@@ -15,7 +15,7 @@ public class GrammarTestResult extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_grammar_result);
-    	Grammar.mediaPlayer.stop();
+    	Grammar.mediaPlayer.pause();
     	TextView QR = (TextView)findViewById(R.id.QR);
     	QR.setText(MainMenu.qnum - Grammar.wrongans+"/"+MainMenu.qnum);
     	TextView PRC = (TextView)findViewById(R.id.PRC);

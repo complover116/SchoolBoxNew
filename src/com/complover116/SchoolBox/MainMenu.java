@@ -39,7 +39,7 @@ static MediaPlayer ButtonSound;
     }
     
     public void buttonpress(View view){
-    	mediaPlayer.stop();
+    	mediaPlayer.pause();
     	ButtonSound.start();
     	Intent intent = new Intent(this, Grammar.class);
     	startActivity(intent);

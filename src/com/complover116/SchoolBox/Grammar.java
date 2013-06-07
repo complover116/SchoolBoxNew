@@ -174,7 +174,7 @@ public class Grammar extends Activity {
     }
     public void GoToMainMenu(View poot) {
     	ButtonSound.start();
-    	mediaPlayer.stop();
+    	mediaPlayer.pause();
 	this.wrongans = 0;
     	Intent samiykrutoy = new Intent(this, MainMenu.class);
     	startActivity(samiykrutoy);
