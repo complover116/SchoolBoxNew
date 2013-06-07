@@ -42,6 +42,7 @@ public class ResourcesCheck extends Activity {
         String type = null;
         int typ = 0;
         Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
+		Grammar.mediaPlayer.setLooping(true);
         Log.d("STATUS", "Fud loaded");
         Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
         Log.d("STATUS", "Yes loaded");
@@ -50,6 +51,7 @@ public class ResourcesCheck extends Activity {
         Grammar.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
         Log.d("STATUS", "Button loaded");
         MainMenu.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lal);
+		MainMenu.mediaPlayer.setLooping(true);
         Log.d("STATUS", "Lal loaded");
         MainMenu.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
         //TODO fix sounds loading twice!
