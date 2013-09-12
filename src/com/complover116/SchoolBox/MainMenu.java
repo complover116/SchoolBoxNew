@@ -49,6 +49,8 @@ static MediaPlayer ButtonSound;
       
     }
 	public void exit(View view) {
+		System.runFinalizersOnExit(true);
+		System.exit(0);
 		this.finish();
 	}
 }
