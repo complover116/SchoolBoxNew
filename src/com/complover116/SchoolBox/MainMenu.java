@@ -26,18 +26,25 @@ long myDownloadReference;
 AlertDialog dialog;
 static MediaPlayer mediaPlayer;
 static MediaPlayer ButtonSound;
+static VideoView VV;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		ResCheck();
         this.setContentView(R.layout.activity_main_menu);
-    	mediaPlayer.start(); // no need to call prepare(); create() does that for you
-		VideoView VV = (VideoView)findViewById(R.id.VidVi);
+		VV = (VideoView)findViewById(R.id.VidVi);
 		VV.setVideoURI(Uri.parse("android.resource://com.complover116.SchoolBox/"+R.raw.preview));
-		VV.start();
-    }
 
+		
+    }
+    @Override
+	public void onResume() {
+		super.onResume();
+		VV.start();
+		mediaPlayer.start();
+	}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_menu, menu);

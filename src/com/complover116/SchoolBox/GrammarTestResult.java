@@ -38,8 +38,7 @@ public class GrammarTestResult extends Activity {
     public void GoToMainMenu(View toop) {
     	ButtonSound.start();
     	Grammar.wrongans = 0;
-    	Intent samiykrutoy = new Intent(this, MainMenu.class);
-    	startActivity(samiykrutoy);
+    	this.finish();
     }
     	public void finishirovat() {
 		this.finish();
