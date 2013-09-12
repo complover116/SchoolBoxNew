@@ -176,10 +176,6 @@ public class Grammar extends Activity {
     	ButtonSound.start();
     	mediaPlayer.pause();
 	this.wrongans = 0;
-    	Intent samiykrutoy = new Intent(this, MainMenu.class);
-    	startActivity(samiykrutoy);
+this.finish();
     }
-    	public void finishirovat() {
-		this.finish();
-	}
 }
