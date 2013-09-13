@@ -65,6 +65,7 @@ static VideoView VV;
       
     }
 	public void exit(View view) {
+		mediaPlayer.stop();
 		this.finish();
 	}
 	public void ResCheck() {
