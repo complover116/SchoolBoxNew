@@ -1,140 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="fill_parent"
-        android:layout_height="461dp" >
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="461dp" >
 
-    <RelativeLayout
+    <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="461dp" >
+        android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/Question"
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:text="Question" />
+            android:layout_height="461dp" >
 
-        <TextView
-            android:id="@+id/wrongansn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView" />
+            <TextView
+                android:id="@+id/Question"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:text="Question" />
 
-        <TextView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ans1"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView" />
+            <TextView
+                android:id="@+id/wrongansn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="TextView" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/Question"
-            android:layout_toLeftOf="@+id/progress"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ans1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="TextView" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView3"
-            android:layout_marginTop="20dp"
-            android:layout_toLeftOf="@+id/progress"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/Question"
+                android:layout_toLeftOf="@+id/progress"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView2"
-            android:layout_marginTop="20dp"
-            android:layout_toLeftOf="@+id/progress"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView3"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/progress"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_marginTop="20dp"
-            android:layout_toLeftOf="@+id/progress"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView2"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/progress"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/ans1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/textView1"
-            android:layout_alignParentRight="true"
-            android:onClick="nextStep"
-            android:text="1" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView1"
+                android:layout_marginTop="20dp"
+                android:layout_toLeftOf="@+id/progress"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/ans2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView2"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_alignParentRight="true"
-            android:onClick="nextStep"
-            android:text="2" />
+            <Button
+                android:id="@+id/ans1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/textView1"
+                android:layout_alignParentRight="true"
+                android:onClick="nextStep"
+                android:text="1" />
 
-        <Button
-            android:id="@+id/ans4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/textView4"
-            android:layout_alignParentRight="true"
-            android:onClick="nextStep"
-            android:text="4" />
+            <Button
+                android:id="@+id/ans2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView2"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_alignParentRight="true"
+                android:onClick="nextStep"
+                android:text="2" />
 
-        <Button
-            android:id="@+id/ans3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/textView3"
-            android:layout_alignParentRight="true"
-            android:onClick="nextStep"
-            android:text="3" />
+            <Button
+                android:id="@+id/ans4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/textView4"
+                android:layout_alignParentRight="true"
+                android:onClick="nextStep"
+                android:text="4" />
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView4"
-            android:layout_centerHorizontal="true"
-            android:onClick="GoToMainMenu"
-            android:text="Вернуться в главное меню" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/ans3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/textView3"
+                android:layout_alignParentRight="true"
+                android:onClick="nextStep"
+                android:text="3" />
 
-</ScrollView>
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:onClick="GoToMainMenu"
-            android:text="Вернуться в главное меню" />
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="GoToMainMenu"
+                android:text="Вернуться в главное меню" />
+
+        </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>
