@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,6 +28,21 @@ public class Grammar extends Activity {
         static int BTypeCount = 0;
         static int CTypeCount = 0;
         static int DTypeCount = 0;
+    public boolean onCreateOptionsMenu(Menu menu) {
+         getMenuInflater().inflate(R.menu.grammar_menu, menu);
+         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+    	if(item.getTitle().toString().compareTo("Music") == 0) {
+    		if(item.isChecked()) {
+    			mediaPlayer.stop();
+    		} else {
+    			mediaPlayer.start();
+    		}
+    	}
+    	return false;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	

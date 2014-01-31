@@ -1,0 +1,6 @@
+xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/item1" android:titleCondensed="Music" android:visible="true" android:checkable="true" android:menuCategory="container" android:title="Music" android:enabled="true" android:checked="true"></item>
+    
+
+</menu>
