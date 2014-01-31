@@ -120,6 +120,10 @@
                 android:onClick="nextStep"
                 android:text="3" />
 
+
+
+        </RelativeLayout>
+    </ScrollView>
             <Button
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
@@ -128,8 +132,4 @@
                 android:layout_centerHorizontal="true"
                 android:onClick="GoToMainMenu"
                 android:text="Вернуться в главное меню" />
-
-        </RelativeLayout>
-    </ScrollView>
-
 </RelativeLayout>
