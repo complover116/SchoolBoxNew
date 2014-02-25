@@ -28,10 +28,6 @@ public class Grammar extends Activity {
         static int BTypeCount = 0;
         static int CTypeCount = 0;
         static int DTypeCount = 0;
-    public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.grammar_menu, menu);
-         return true;
-    }
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
     	if(item.getTitle().toString().compareTo("Music") == 0) {

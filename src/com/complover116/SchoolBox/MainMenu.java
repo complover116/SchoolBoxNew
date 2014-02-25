@@ -45,11 +45,6 @@ static VideoView VV;
 		VV.start();
 		mediaPlayer.start();
 	}
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
-        return true;
-    }
     public void onSaveInstanceState(Bundle instanceState) {
      super.onSaveInstanceState(instanceState);
     }
