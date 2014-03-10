@@ -32,8 +32,11 @@ AlertDialog dialog;
 static MediaPlayer mediaPlayer;
 static MediaPlayer ButtonSound;
 static VideoView VV;
-static int fails = 0;
+int fails = 0;
 static AlertDialog downloaddialog;
+long downloadid;
+byte dltype;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,11 @@ static AlertDialog downloaddialog;
 		VV.start();
 		mediaPlayer.start();
 	}
+	public void onPause() {
+		super.onPause();
+		mediaPlayer.stop();
+		
+	}
     public void onSaveInstanceState(Bundle instanceState) {
      super.onSaveInstanceState(instanceState);
     }
@@ -64,7 +72,7 @@ static AlertDialog downloaddialog;
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		builder.setMessage("The questions file is entirely corrupt. The program can't fix it, but you could choose a diferent file... Click \"Auto-install\" to automatically get a working one")
     	       .setTitle("Failed to load Questions");
-
+    		builder.setCancelable(false);
     		// Add the buttons
     		builder.setPositiveButton("Configure...", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
@@ -78,26 +86,33 @@ static AlertDialog downloaddialog;
     		       });
     		builder.setNeutralButton("Auto-install", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
-		        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-		        	   request.setDescription("SchoolBox default questions file");
-		        	   request.setTitle("ScholBox questions");
-		        	   // in order for this if to run, you must use the android 3.2 to compile your app
-		        	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-		        	       request.allowScanningByMediaScanner();
-		        	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-		        	   }
-		        	   
-		        	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/Questions.scb"));
-		        	   
-		        	   request.setDestinationUri(destination);
+			       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
+			    		builder.setMessage("Downloading the question file...")
+			    	       .setTitle("Loading...");
+			    		builder.setCancelable(false);
+			    		AlertDialog dialogy = builder.create();
+			    		dialogy.show();
+			    		downloaddialog = dialogy;
+			        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
+			        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+			        	   request.setDescription("SchoolBox default questions file");
+			        	   request.setTitle("ScholBox questions");
+			        	   // in order for this if to run, you must use the android 3.2 to compile your app
+			        	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			        	       request.allowScanningByMediaScanner();
+			        	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+			        	   }
+			        	   
+			        	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/Questions.scb"));
+			        	   
+			        	   request.setDestinationUri(destination);
 
-		        	   // get download service and enqueue file
-		        	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-		        	   manager.enqueue(request);
-		        	   
-		               // User cancelled the dialog
-		           }
+			        	   // get download service and enqueue file
+			        	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+			        	   manager.enqueue(request);
+			        	   
+			               // User cancelled the dialog
+			           }
 		       });
     		// Set other dialog properties
 
@@ -111,7 +126,7 @@ static AlertDialog downloaddialog;
         		AlertDialog.Builder builder = new AlertDialog.Builder(this);
         		builder.setMessage("We still don't have access to the questions. Looks as if there is something wrong with file storage permissions. Unfortunately, the program cannot help you there : (")
         	       .setTitle("Failed to load Questions");
-
+        		builder.setCancelable(false);
         		// Add the buttons
         		builder.setPositiveButton("Exit...", new DialogInterface.OnClickListener() {
         		           public void onClick(DialogInterface dialog, int id) {
@@ -129,7 +144,7 @@ static AlertDialog downloaddialog;
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
     		builder.setMessage("Loading questions failed. Perhaps, it is the first time you open this app? If you haven't configured your question list yet, click \"Configure\". If you want, you can click \"Auto-install\", which will download and install demo questions.")
     	       .setTitle("Failed to load Questions");
-
+    		builder.setCancelable(false);
     		// Add the buttons
     		builder.setPositiveButton("Configure...", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
@@ -146,6 +161,7 @@ static AlertDialog downloaddialog;
 		       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
 		    		builder.setMessage("Downloading the question file...")
 		    	       .setTitle("Loading...");
+		    		builder.setCancelable(false);
 		    		AlertDialog dialogy = builder.create();
 		    		dialogy.show();
 		    		downloaddialog = dialogy;
@@ -171,12 +187,12 @@ static AlertDialog downloaddialog;
 		           }
 		       });
     		// Set other dialog properties
-
+    		
     		// Create the AlertDialog
     		AlertDialog dialog = builder.create();
     		dialog.show();
     		}
-    	} else {
+    	} else if (result == 1){
     	mediaPlayer.pause();
     	ButtonSound.start();
     	Intent intent = new Intent(this, Grammar.class);
@@ -267,6 +283,7 @@ static AlertDialog downloaddialog;
 		        break;
 		        case 6:
 	type = line;
+	DataLine = 7;
               if(type.equalsIgnoreCase("1")) {
               typ = 1;
               }
@@ -279,8 +296,9 @@ static AlertDialog downloaddialog;
               typ = 4;
               }else {
                 Log.e("InRes", "Type Failure: Expected a number, got |"+line+"| at Question "+Qc);
+                DataLine = 0;
               }
-              DataLine = 7;
+              
             break;
             case 7:
 			        DataLine = 1;
@@ -312,7 +330,7 @@ static AlertDialog downloaddialog;
 		}
         
         MainMenu.qnum = Qc;
-		Log.d("STATUS", "Checked resources:" + text);
+		Log.d("inres", "Checked resources, "+Qc+" Questions loaded.");
 		dialog.dismiss();
 		if(quests[1] == null) {
 			return -1;
@@ -326,8 +344,17 @@ static AlertDialog downloaddialog;
 	    public void onReceive(Context ctxt, Intent intent) {
 	        // Do Something
 	    	downloaddialog.dismiss();
+	    	if(dltype == 0) {
 	    	ResCheck();
 	    	Toast.makeText(getApplicationContext(), "Installation succeeded. You can start now!", Toast.LENGTH_SHORT).show();
+	    	}
+	    	if(dltype == 1) {
+	    	Toast.makeText(getApplicationContext(), "Installation succeeded. You can start now!", Toast.LENGTH_SHORT).show();
+	    	 Intent intenty = new Intent(Intent.ACTION_VIEW);
+	    	    intent.setDataAndType(Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk")), "application/vnd.android.package-archive");
+	    	intenty.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    	    startActivity(intenty);
+	    	}
 	    }
 	};
 }
