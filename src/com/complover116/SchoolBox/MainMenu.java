@@ -7,14 +7,19 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 
@@ -27,12 +32,14 @@ AlertDialog dialog;
 static MediaPlayer mediaPlayer;
 static MediaPlayer ButtonSound;
 static VideoView VV;
-
+static int fails = 0;
+static AlertDialog downloaddialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		ResCheck();
+        registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+		
         this.setContentView(R.layout.activity_main_menu);
 		VV = (VideoView)findViewById(R.id.VidVi);
 		VV.setVideoURI(Uri.parse("android.resource://com.complover116.SchoolBox/"+R.raw.preview));
@@ -42,6 +49,7 @@ static VideoView VV;
     @Override
 	public void onResume() {
 		super.onResume();
+		LoadMedia();
 		VV.start();
 		mediaPlayer.start();
 	}
@@ -50,10 +58,130 @@ static VideoView VV;
     }
     
     public void buttonpress(View view){
+    	final MainMenu self = this;
+    	byte result = ResCheck();
+    	if(result == -1) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage("The questions file is entirely corrupt. The program can't fix it, but you could choose a diferent file... Click \"Auto-install\" to automatically get a working one")
+    	       .setTitle("Failed to load Questions");
+
+    		// Add the buttons
+    		builder.setPositiveButton("Configure...", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		               // User clicked OK button
+    		           }
+    		       });
+    		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		               // User cancelled the dialog
+    		           }
+    		       });
+    		builder.setNeutralButton("Auto-install", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
+		        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+		        	   request.setDescription("SchoolBox default questions file");
+		        	   request.setTitle("ScholBox questions");
+		        	   // in order for this if to run, you must use the android 3.2 to compile your app
+		        	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		        	       request.allowScanningByMediaScanner();
+		        	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		        	   }
+		        	   
+		        	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/Questions.scb"));
+		        	   
+		        	   request.setDestinationUri(destination);
+
+		        	   // get download service and enqueue file
+		        	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+		        	   manager.enqueue(request);
+		        	   
+		               // User cancelled the dialog
+		           }
+		       });
+    		// Set other dialog properties
+
+    		// Create the AlertDialog
+    		AlertDialog dialog = builder.create();
+    		dialog.show();
+    	}
+    	if(result == 0) {
+    		fails = fails + 1;
+    		if(fails > 1) {
+        		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        		builder.setMessage("We still don't have access to the questions. Looks as if there is something wrong with file storage permissions. Unfortunately, the program cannot help you there : (")
+        	       .setTitle("Failed to load Questions");
+
+        		// Add the buttons
+        		builder.setPositiveButton("Exit...", new DialogInterface.OnClickListener() {
+        		           public void onClick(DialogInterface dialog, int id) {
+        		               self.exit(null);
+        		           }
+        		       });
+        		builder.setNegativeButton("WAIT! I CAN SOLVE IT!", new DialogInterface.OnClickListener() {
+ 		           public void onClick(DialogInterface dialog, int id) {
+ 		               // User cancelled the dialog
+ 		           }
+ 		       });
+        		AlertDialog dialog = builder.create();
+        		dialog.show();
+    		} else {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage("Loading questions failed. Perhaps, it is the first time you open this app? If you haven't configured your question list yet, click \"Configure\". If you want, you can click \"Auto-install\", which will download and install demo questions.")
+    	       .setTitle("Failed to load Questions");
+
+    		// Add the buttons
+    		builder.setPositiveButton("Configure...", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		               // User clicked OK button
+    		           }
+    		       });
+    		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		               // User cancelled the dialog
+    		           }
+    		       });
+    		builder.setNeutralButton("Auto-install", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
+		    		builder.setMessage("Downloading the question file...")
+		    	       .setTitle("Loading...");
+		    		AlertDialog dialogy = builder.create();
+		    		dialogy.show();
+		    		downloaddialog = dialogy;
+		        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
+		        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+		        	   request.setDescription("SchoolBox default questions file");
+		        	   request.setTitle("ScholBox questions");
+		        	   // in order for this if to run, you must use the android 3.2 to compile your app
+		        	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		        	       request.allowScanningByMediaScanner();
+		        	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		        	   }
+		        	   
+		        	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/Questions.scb"));
+		        	   
+		        	   request.setDestinationUri(destination);
+
+		        	   // get download service and enqueue file
+		        	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+		        	   manager.enqueue(request);
+		        	   
+		               // User cancelled the dialog
+		           }
+		       });
+    		// Set other dialog properties
+
+    		// Create the AlertDialog
+    		AlertDialog dialog = builder.create();
+    		dialog.show();
+    		}
+    	} else {
     	mediaPlayer.pause();
     	ButtonSound.start();
     	Intent intent = new Intent(this, Grammar.class);
     	startActivity(intent);
+    	}
     }
         @Override
     public void onBackPressed() {
@@ -63,12 +191,41 @@ static VideoView VV;
 		mediaPlayer.stop();
 		this.finish();
 	}
-	public void ResCheck() {
-		Log.d("STATUS", "Loading Screeen image...");
-		setContentView(R.layout.activity_resources_check);
-		Log.d("STATUS", "Loaded screen image!");
-		File sdcard = Environment.getExternalStorageDirectory();
-		File file = new File(sdcard,"Questions.txt");
+	public void LoadMedia() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Loading media...")
+	       .setTitle("Loading...");
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	       Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
+			Grammar.mediaPlayer.setLooping(true);
+	        Log.d("STATUS", "Fud loaded");
+	        Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
+	        Log.d("STATUS", "Yes loaded");
+	        Grammar.nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
+	        Log.d("STATUS", "No loaded");
+	        Grammar.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
+	        Log.d("STATUS", "Button loaded");
+	        MainMenu.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lal);
+			MainMenu.mediaPlayer.setLooping(true);
+	        Log.d("STATUS", "Lal loaded");
+	        MainMenu.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
+	        //TODO fix sounds loading twice!
+	        Log.d("STATUS", "Button loaded TODO Fix loading twice!");
+	        GrammarTestResult.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
+	        dialog.dismiss();
+	}
+	public byte ResCheck() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Parsing resources...")
+	       .setTitle("Loading...");
+		AlertDialog dialog = builder.create();
+		dialog.show();
+		
+		File file = new File(getExternalFilesDir( null ).getPath()+"/Questions.scb");
+		if(file.length() == 0) {
+			return 0;
+		}
 		StringBuilder text = new StringBuilder();
         int Qc = 0;
         int DataLine = 1;
@@ -79,23 +236,7 @@ static VideoView VV;
         String CQVar4 = null;
         String type = null;
         int typ = 0;
-        Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
-		Grammar.mediaPlayer.setLooping(true);
-        Log.d("STATUS", "Fud loaded");
-        Grammar.yesmp = MediaPlayer.create(this.getBaseContext(), R.raw.yes);
-        Log.d("STATUS", "Yes loaded");
-        Grammar.nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
-        Log.d("STATUS", "No loaded");
-        Grammar.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
-        Log.d("STATUS", "Button loaded");
-        MainMenu.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lal);
-		MainMenu.mediaPlayer.setLooping(true);
-        Log.d("STATUS", "Lal loaded");
-        MainMenu.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
-        //TODO fix sounds loading twice!
-        Log.d("STATUS", "Button loaded TODO Fix loading twice!" + text);
-        GrammarTestResult.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
-        Log.d("STATUS", "Button loaded TODO Fix loading twice!" + text);
+ 
 		try {
 		    BufferedReader br = new BufferedReader(new FileReader(file));
 		    String line;
@@ -109,7 +250,7 @@ static VideoView VV;
 		        DataLine = 2;
 		        break;
 		        case 2:
-			        CQVar1 = line;
+			        CQVar1 = line;registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 			        DataLine = 3;
 		        break;
 		        case 3:
@@ -167,9 +308,26 @@ static VideoView VV;
 		}
 		catch (IOException e) {
 		    Log.e("InRes", "Something went wrong...");
+		    return 0;
 		}
         
         MainMenu.qnum = Qc;
 		Log.d("STATUS", "Checked resources:" + text);
+		dialog.dismiss();
+		if(quests[1] == null) {
+			return -1;
+		} else {
+			return 1;
+		}
 	}
+	
+	
+	BroadcastReceiver onComplete=new BroadcastReceiver() {
+	    public void onReceive(Context ctxt, Intent intent) {
+	        // Do Something
+	    	downloaddialog.dismiss();
+	    	ResCheck();
+	    	Toast.makeText(getApplicationContext(), "Installation succeeded. You can start now!", Toast.LENGTH_SHORT).show();
+	    }
+	};
 }
