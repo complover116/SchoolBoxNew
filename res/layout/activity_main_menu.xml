@@ -32,12 +32,12 @@
         android:text="Выход" />
 
 	<Button
-	    android:id="@+id/Button3"
+	    android:id="@+id/Button01"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentTop="true"
-	    android:onClick="FUpdateClick"
-	    android:text="FU" />
+	    android:layout_centerHorizontal="true"
+	    android:onClick="configClick"
+	    android:text="Меню закачки вопросов.." />
 
 	</RelativeLayout>

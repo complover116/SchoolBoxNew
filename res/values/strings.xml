@@ -8,5 +8,6 @@
     <string name="title_activity_resources_check">SchoolBox</string>
     <string name="title_activity_question_imanager">Question Manager</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_view_question_file">ViewQuestionFile</string>
 
 </resources>

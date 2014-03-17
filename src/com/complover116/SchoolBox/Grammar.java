@@ -62,7 +62,7 @@ public class Grammar extends Activity {
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
         ptw.setText(cquest+"/"+MainMenu.qnum);
-        wrngans.setText("–û—à–∏–±–∫–∏:"+wrongans+"");
+        wrngans.setText("Œ¯Ë·ÍË:"+wrongans+"");
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
     }
     public void onBackPressed() {
@@ -182,7 +182,7 @@ public class Grammar extends Activity {
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
         ptw.setText(cquest+"/"+MainMenu.qnum);
-        wrngans.setText("–û—à–∏–±–∫–∏:"+wrongans+"");
+        wrngans.setText("Œ¯Ë·ÍË:"+wrongans+"");
     	}
     }
     public void GoToMainMenu(View poot) {

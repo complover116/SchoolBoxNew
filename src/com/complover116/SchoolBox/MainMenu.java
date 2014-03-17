@@ -35,18 +35,18 @@ static VideoView VV;
 int fails = 0;
 static AlertDialog downloaddialog;
 long downloadid;
-byte dltype;
+static byte dltype;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
 		
         this.setContentView(R.layout.activity_main_menu);
 		VV = (VideoView)findViewById(R.id.VidVi);
 		VV.setVideoURI(Uri.parse("android.resource://com.complover116.SchoolBox/"+R.raw.preview));
-
+		registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 		
     }
     @Override
@@ -56,6 +56,12 @@ byte dltype;
 		VV.start();
 		mediaPlayer.start();
 	}
+    @Override
+	public void onDestroy() {
+    	super.onDestroy();
+		unregisterReceiver(onComplete);
+	}
+    @Override
 	public void onPause() {
 		super.onPause();
 		mediaPlayer.stop();
@@ -66,6 +72,14 @@ byte dltype;
     }
     public void FUpdateClick(View view) {
     	doupdate();
+    }
+    public void confQuestions() {
+    	ButtonSound.start();
+    	Intent intent = new Intent(this, Install.class);
+    	startActivity(intent);
+    }
+    public void configClick(View view) {
+    	confQuestions();
     }
     public void doupdate(){
     	dltype = 1;
@@ -99,28 +113,30 @@ byte dltype;
     	byte result = ResCheck();
     	if(result == -1) {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("The questions file is entirely corrupt. The program can't fix it, but you could choose a diferent file... Click \"Auto-install\" to automatically get a working one")
-    	       .setTitle("Failed to load Questions");
+    		builder.setMessage("Файл вопросов поврежден. Это может быть вызвано сбоем при закачке файла, попыткой его отредактировать впоследствии или неправильным составлением файла. Вы можете скачать другой файл вопросов для работы с ним.")
+    	       .setTitle("Критическая ошибка!");
     		builder.setCancelable(false);
     		// Add the buttons
-    		builder.setPositiveButton("Configure...", new DialogInterface.OnClickListener() {
+    		builder.setPositiveButton("Выбрать файл...", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
     		               // User clicked OK button
     		           }
     		       });
-    		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
     		               // User cancelled the dialog
     		           }
     		       });
-    		builder.setNeutralButton("Auto-install", new DialogInterface.OnClickListener() {
+    		builder.setNeutralButton("Скачать тестовый файл", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 			       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
-			    		builder.setMessage("Downloading the question file...")
-			    	       .setTitle("Loading...");
+			    		builder.setMessage("Скачиваю файл вопросов...")
+			    	       .setTitle("Пожалуйста, подождите...");
 			    		builder.setCancelable(false);
 			    		AlertDialog dialogy = builder.create();
 			    		dialogy.show();
+			    		File file = new File(getExternalFilesDir( null ).getPath()+"/Questions.scb");
+			    		file.delete();
 			        	dltype = 0;
 			    		downloaddialog = dialogy;
 			        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
@@ -154,16 +170,16 @@ byte dltype;
     		fails = fails + 1;
     		if(fails > 1) {
         		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        		builder.setMessage("We still don't have access to the questions. Looks as if there is something wrong with file storage permissions. Unfortunately, the program cannot help you there : (")
-        	       .setTitle("Failed to load Questions");
+        		builder.setMessage("Файл вопросов недоступен. Это может быть вызвано особенностями прошивки или блокирующими программами. Программа не может помочь вам здесь.")
+        	       .setTitle("Критическая ошибка");
         		builder.setCancelable(false);
         		// Add the buttons
-        		builder.setPositiveButton("Exit...", new DialogInterface.OnClickListener() {
+        		builder.setPositiveButton("Выход", new DialogInterface.OnClickListener() {
         		           public void onClick(DialogInterface dialog, int id) {
         		               self.exit(null);
         		           }
         		       });
-        		builder.setNegativeButton("WAIT! I CAN SOLVE IT!", new DialogInterface.OnClickListener() {
+        		builder.setNegativeButton("Вернуться в программу", new DialogInterface.OnClickListener() {
  		           public void onClick(DialogInterface dialog, int id) {
  		               // User cancelled the dialog
  		           }
@@ -172,25 +188,26 @@ byte dltype;
         		dialog.show();
     		} else {
     		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage("Loading questions failed. Perhaps, it is the first time you open this app? If you haven't configured your question list yet, click \"Configure\". If you want, you can click \"Auto-install\", which will download and install demo questions.")
-    	       .setTitle("Failed to load Questions");
+    		builder.setMessage("Файл вопросов отсутсвует. В этом нет ничего страшного - вы можете скачать любой файл вопросов из меню закачки вопросов.")
+    	       .setTitle("Файл вопросов отсутствует");
     		builder.setCancelable(false);
     		// Add the buttons
-    		builder.setPositiveButton("Configure...", new DialogInterface.OnClickListener() {
+    		builder.setPositiveButton("Выбрать файл...", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
     		               // User clicked OK button
     		           }
     		       });
-    		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+    		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
     		               // User cancelled the dialog
+    		        	   fails = fails - 1;
     		           }
     		       });
-    		builder.setNeutralButton("Auto-install", new DialogInterface.OnClickListener() {
+    		builder.setNeutralButton("Скачать тестовый файл", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
-		    		builder.setMessage("Downloading the question file...")
-		    	       .setTitle("Loading...");
+		    		builder.setMessage("Скачиваю файл вопросов...")
+		    	       .setTitle("Пожалуйста, подождите...");
 		    		builder.setCancelable(false);
 		    		AlertDialog dialogy = builder.create();
 		    		dialogy.show();
@@ -258,11 +275,6 @@ byte dltype;
 	        GrammarTestResult.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
 	}
 	public byte ResCheck() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Parsing resources...")
-	       .setTitle("Loading...");
-		AlertDialog dialog = builder.create();
-		dialog.show();
 		
 		File file = new File(getExternalFilesDir( null ).getPath()+"/Questions.scb");
 		if(file.length() == 0) {
@@ -292,7 +304,7 @@ byte dltype;
 		        DataLine = 2;
 		        break;
 		        case 2:
-			        CQVar1 = line;registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+			        CQVar1 = line;
 			        DataLine = 3;
 		        break;
 		        case 3:
@@ -368,12 +380,18 @@ byte dltype;
 	BroadcastReceiver onComplete=new BroadcastReceiver() {
 	    public void onReceive(Context ctxt, Intent intent) {
 	        // Do Something
-	    	downloaddialog.dismiss();
+	    	
 	    	if(dltype == 0) {
+	    		downloaddialog.dismiss();
 	    	ResCheck();
-	    	Toast.makeText(getApplicationContext(), "Installation succeeded. You can start now!", Toast.LENGTH_SHORT).show();
+	    	Toast.makeText(getApplicationContext(), "Установка успешна. Можно начинать!", Toast.LENGTH_LONG).show();
+	    	}
+	    	if(dltype == 3) {
+	    	ResCheck();
+	    	Toast.makeText(getApplicationContext(), "Установка успешна. Можно начинать!", Toast.LENGTH_LONG).show();
 	    	}
 	    	if(dltype == 1) {
+	    		downloaddialog.dismiss();
 	    	Toast.makeText(getApplicationContext(), "Select \"Install\" when prompted!", Toast.LENGTH_LONG).show();
 	    	 Intent intenty = new Intent(Intent.ACTION_VIEW);
 	    	    intent.setData(Uri.parse("file://"+new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk")));
