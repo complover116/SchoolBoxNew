@@ -64,7 +64,36 @@ byte dltype;
     public void onSaveInstanceState(Bundle instanceState) {
      super.onSaveInstanceState(instanceState);
     }
-    
+    public void FUpdateClick(View view) {
+    	doupdate();
+    }
+    public void doupdate(){
+    	dltype = 1;
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	builder.setMessage("Downloading the question file...")
+       .setTitle("Loading...");
+	builder.setCancelable(false);
+	AlertDialog dialogy = builder.create();
+	dialogy.show();
+	downloaddialog = dialogy;
+	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
+	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+	   request.setDescription("SchoolBox update file");
+	   request.setTitle("ScholBox update");
+	   // in order for this if to run, you must use the android 3.2 to compile your app
+	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+	       request.allowScanningByMediaScanner();
+	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+	   }
+	   
+	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk"));
+	   
+	   request.setDestinationUri(destination);
+
+	   // get download service and enqueue file
+	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+	   manager.enqueue(request);
+    }
     public void buttonpress(View view){
     	final MainMenu self = this;
     	byte result = ResCheck();
@@ -92,6 +121,7 @@ byte dltype;
 			    		builder.setCancelable(false);
 			    		AlertDialog dialogy = builder.create();
 			    		dialogy.show();
+			        	dltype = 0;
 			    		downloaddialog = dialogy;
 			        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
 			        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -164,6 +194,7 @@ byte dltype;
 		    		builder.setCancelable(false);
 		    		AlertDialog dialogy = builder.create();
 		    		dialogy.show();
+		        	dltype = 0;
 		    		downloaddialog = dialogy;
 		        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
 		        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -208,11 +239,7 @@ byte dltype;
 		this.finish();
 	}
 	public void LoadMedia() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Loading media...")
-	       .setTitle("Loading...");
-		AlertDialog dialog = builder.create();
-		dialog.show();
+
 	       Grammar.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.drawable.fud);
 			Grammar.mediaPlayer.setLooping(true);
 	        Log.d("STATUS", "Fud loaded");
@@ -331,7 +358,6 @@ byte dltype;
         
         MainMenu.qnum = Qc;
 		Log.d("inres", "Checked resources, "+Qc+" Questions loaded.");
-		dialog.dismiss();
 		if(quests[1] == null) {
 			return -1;
 		} else {
@@ -349,7 +375,7 @@ byte dltype;
 	    	Toast.makeText(getApplicationContext(), "Installation succeeded. You can start now!", Toast.LENGTH_SHORT).show();
 	    	}
 	    	if(dltype == 1) {
-	    	Toast.makeText(getApplicationContext(), "Installation succeeded. You can start now!", Toast.LENGTH_SHORT).show();
+	    	Toast.makeText(getApplicationContext(), "Select \"Install\" when prompted!", Toast.LENGTH_LONG).show();
 	    	 Intent intenty = new Intent(Intent.ACTION_VIEW);
 	    	    intent.setDataAndType(Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk")), "application/vnd.android.package-archive");
 	    	intenty.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

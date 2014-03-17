@@ -30,4 +30,14 @@
         android:layout_marginBottom="5dp"
         android:onClick="exit"
         android:text="Выход" />
+
+	<Button
+	    android:id="@+id/Button3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true"
+	    android:onClick="FUpdateClick"
+	    android:text="FU" />
+
 	</RelativeLayout>
