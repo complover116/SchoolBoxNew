@@ -70,13 +70,13 @@ byte dltype;
     public void doupdate(){
     	dltype = 1;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	builder.setMessage("Downloading the question file...")
+	builder.setMessage("Downloading the update...")
        .setTitle("Loading...");
 	builder.setCancelable(false);
 	AlertDialog dialogy = builder.create();
 	dialogy.show();
 	downloaddialog = dialogy;
-	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
+	   String url = "https://dl.dropboxusercontent.com/s/883c70y8dssdxmo/Schoolbox.apk?dl=1&token_hash=AAEksOhJv2FKZHrrHxQwfrgdm98extYxjHDbNSpCw3HsSg";
 	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 	   request.setDescription("SchoolBox update file");
 	   request.setTitle("ScholBox update");
@@ -256,7 +256,6 @@ byte dltype;
 	        //TODO fix sounds loading twice!
 	        Log.d("STATUS", "Button loaded TODO Fix loading twice!");
 	        GrammarTestResult.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
-	        dialog.dismiss();
 	}
 	public byte ResCheck() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -377,9 +376,10 @@ byte dltype;
 	    	if(dltype == 1) {
 	    	Toast.makeText(getApplicationContext(), "Select \"Install\" when prompted!", Toast.LENGTH_LONG).show();
 	    	 Intent intenty = new Intent(Intent.ACTION_VIEW);
-	    	    intent.setDataAndType(Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk")), "application/vnd.android.package-archive");
-	    	intenty.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    	    intent.setData(Uri.parse("file://"+new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk")));
+	    	    intent.setType("application/vnd.android.package-archive");
 	    	    startActivity(intenty);
+
 	    	}
 	    }
 	};
