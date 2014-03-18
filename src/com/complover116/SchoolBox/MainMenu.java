@@ -14,11 +14,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -40,6 +43,7 @@ int fails = 0;
 static AlertDialog downloaddialog;
 long downloadid;
 static byte dltype = -1;
+static byte check = 1;
 
 
     @Override
@@ -51,6 +55,8 @@ static byte dltype = -1;
 		VV = (VideoView)findViewById(R.id.VidVi);
 		VV.setVideoURI(Uri.parse("android.resource://com.complover116.SchoolBox/"+R.raw.preview));
 		registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+		check = 0;
+		((Switch)findViewById(R.id.switch2)).setChecked(true);
 		
     }
     @Override
@@ -71,6 +77,15 @@ static byte dltype = -1;
 		mediaPlayer.stop();
 		
 	}
+    public void toggleCheck(View view) {
+        boolean on = ((Switch)findViewById(R.id.switch2)).isChecked();
+        MainMenu.ButtonSound.start();
+        if (on) {
+        	check = 0;
+        } else {
+            check = 1;
+        }
+    }
     public void onSaveInstanceState(Bundle instanceState) {
      super.onSaveInstanceState(instanceState);
     }
@@ -79,8 +94,10 @@ static byte dltype = -1;
     }
     public void confQuestions() {
     	ButtonSound.start();
+    	if(isNetworkAvailable()) {
     	Intent intent = new Intent(this, Install.class);
     	startActivity(intent);
+    	}
     }
     public void configClick(View view) {
     	confQuestions();
@@ -133,6 +150,7 @@ static byte dltype = -1;
     		       });
     		builder.setNeutralButton("Скачать тестовый файл", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
+		        	   if(isNetworkAvailable()) {
 			       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
 			    		builder.setMessage("Скачиваю файл вопросов...")
 			    	       .setTitle("Пожалуйста, подождите...");
@@ -163,6 +181,7 @@ static byte dltype = -1;
 			        	   
 			               // User cancelled the dialog
 			           }
+		           }
 		       });
     		// Set other dialog properties
 
@@ -209,6 +228,7 @@ static byte dltype = -1;
     		       });
     		builder.setNeutralButton("Скачать тестовый файл", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
+		        	   if(isNetworkAvailable()) {
 		       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
 		    		builder.setMessage("Скачиваю файл вопросов...")
 		    	       .setTitle("Пожалуйста, подождите...");
@@ -236,6 +256,7 @@ static byte dltype = -1;
 		        	   manager.enqueue(request);
 		        	   
 		               // User cancelled the dialog
+		           }
 		           }
 		       });
     		// Set other dialog properties
@@ -268,14 +289,13 @@ static byte dltype = -1;
 	        Log.d("STATUS", "Yes loaded");
 	        Grammar.nomp = MediaPlayer.create(this.getBaseContext(), R.raw.no);
 	        Log.d("STATUS", "No loaded");
-	        Grammar.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
 	        Log.d("STATUS", "Button loaded");
 	        MainMenu.mediaPlayer = MediaPlayer.create(this.getBaseContext(), R.raw.lal);
 			MainMenu.mediaPlayer.setLooping(true);
 	        Log.d("STATUS", "Lal loaded");
 	        MainMenu.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
 	        //TODO fix sounds loading twice!
-	        Log.d("STATUS", "Button loaded TODO Fix loading twice!");
+	        Log.d("STATUS", "Button loaded");
 	        GrammarTestResult.ButtonSound = MediaPlayer.create(this.getBaseContext(), R.raw.button);
 	}
 	public byte ResCheck() {
@@ -306,15 +326,19 @@ static byte dltype = -1;
 		        switch (DataLine) {
 		        case -3:
 		        type1 = line;
+		        Log.i("InRes", "Type1 set to |"+type1+"|");
 		        break;
 		        case -2:
 		        type2 = line;
+		        Log.i("InRes", "Type2 set to |"+type2+"|");
 		        break;
 		        case -1:
 		        type3 = line;
+		        Log.i("InRes", "Type3 set to |"+type3+"|");
 		        break;
 		        case 0:
 		        type4 = line;
+		        Log.i("InRes", "Type4 set to |"+type4+"|");
 		        break;
 		        case 1:
 		        CQText = line;
@@ -415,4 +439,25 @@ static byte dltype = -1;
 	    	}
 	    }
 	};
+	
+	private boolean isNetworkAvailable() {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    boolean sees = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	    if(!sees) {
+    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    		builder.setMessage("Соединение с интернетом отсутствует. Соединение необходимо для использования данной функции. Подключитесь к сети и попробуйте еще раз.")
+    	       .setTitle("Нет сети");
+    		// Add the buttons
+    		builder.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		               // User clicked OK button
+    		           }
+    		       });
+    		AlertDialog dialog = builder.create();
+    		dialog.show();
+	    }
+	    return sees;
+	}
 }

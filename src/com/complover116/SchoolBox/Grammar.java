@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class Grammar extends Activity {
@@ -19,26 +18,27 @@ public class Grammar extends Activity {
 	String[] pans3;
 	int cquest = 1;
 	int questnum=3;
+	boolean qanswered;
 	static int wrongans;
 	static MediaPlayer mediaPlayer;
 	static MediaPlayer yesmp;
 	static MediaPlayer nomp;
-	static MediaPlayer ButtonSound;
 	static int ATypeCount = 0;
         static int BTypeCount = 0;
         static int CTypeCount = 0;
         static int DTypeCount = 0;
-    @Override
-    public boolean onOptionsItemSelected (MenuItem item) {
-    	if(item.getTitle().toString().compareTo("Music") == 0) {
-    		if(item.isChecked()) {
-    			mediaPlayer.stop();
-    		} else {
-    			mediaPlayer.start();
-    		}
-    	}
-    	return false;
-    }
+        public void toggleMusic(View view) {
+            // Is the toggle on?
+            boolean on = ((Switch)findViewById(R.id.switch1)).isChecked();
+            MainMenu.ButtonSound.start();
+            if (on) {
+                if(!mediaPlayer.isPlaying()) {
+                	mediaPlayer.start();
+                }
+            } else {
+                mediaPlayer.pause();
+            }
+        }
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	
@@ -48,6 +48,10 @@ public class Grammar extends Activity {
     	pans1 = new String[questnum+3];
     	pans2 = new String[questnum+3];
     	pans3 = new String[questnum+3];
+    	ATypeCount = 0;
+        BTypeCount = 0;
+        CTypeCount = 0;
+        DTypeCount = 0;
         setContentView(R.layout.activity_grammar);
         TextView qt = (TextView) this.findViewById(R.id.Question);
         TextView textView1 = (TextView) this.findViewById(R.id.textView1);
@@ -61,21 +65,45 @@ public class Grammar extends Activity {
         textView2.setText(MainMenu.quests[cquest].pans2);
         textView3.setText(MainMenu.quests[cquest].pans3);
         textView4.setText(MainMenu.quests[cquest].pans4);
+        ((Switch)findViewById(R.id.switch1)).setChecked(true);
         ptw.setText(cquest+"/"+MainMenu.qnum);
         wrngans.setText("Ошибки:"+wrongans+"");
     	mediaPlayer.start(); // no need to call prepare(); create() does that for you
+    	
     }
     public void onBackPressed() {
     	
     }
-    public void nextStep(View view) {
-    	ButtonSound.start();
+    public void displayCorrect() {
+    	switch(MainMenu.quests[cquest].rans) {
+    	case 1:
+    		((TextView)this.findViewById(R.id.textView1)).setTextColor(Color.rgb(0, 255, 0));
+    	break;
+    	case 2:
+    		((TextView)this.findViewById(R.id.textView2)).setTextColor(Color.rgb(0, 255, 0));
+    	break;
+    	case 3:
+    		((TextView)this.findViewById(R.id.textView3)).setTextColor(Color.rgb(0, 255, 0));
+    	break;
+    	case 4:
+    		((TextView)this.findViewById(R.id.textView4)).setTextColor(Color.rgb(0, 255, 0));
+    	break;
+    	}
+    }
+    public void answered(View view) {
+
+    	MainMenu.ButtonSound.start();
     	Button but = (Button) view;
     	switch (but.getId()) {
     	case(R.id.ans1):
     		if(MainMenu.quests[cquest].rans!=1){
-    		wrongans++;	
+    		
     		nomp.start();
+    		
+    		((TextView)this.findViewById(R.id.textView1)).setTextColor(Color.rgb(255, 0, 0));
+    		if(!qanswered){
+    			wrongans++;	
+    			qanswered = true;
            switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
@@ -90,14 +118,24 @@ public class Grammar extends Activity {
           DTypeCount ++;
           break;
         }
+           if(MainMenu.check == 1){
+   			nextStep();
+   		}
+    		}
     		} else {
     			yesmp.start();
+    			nextStep();
     		}
     		break;
     	case(R.id.ans2):
     		if(MainMenu.quests[cquest].rans!=2){
-    		wrongans++;	
+    			
     		nomp.start();
+    		
+    		((TextView)this.findViewById(R.id.textView2)).setTextColor(Color.rgb(255, 0, 0));
+    		if(!qanswered){
+    			wrongans++;	
+    			qanswered = true;
     		           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
@@ -112,14 +150,24 @@ public class Grammar extends Activity {
           DTypeCount ++;
           break;
         }
+    		           if(MainMenu.check == 1){
+    		      			nextStep();
+    		      		}
+    		}
     		} else {
     			yesmp.start();
+    			nextStep();
     		}
     		break;
     	case(R.id.ans3):
     		if(MainMenu.quests[cquest].rans!=3){
-    		wrongans++;	
+    				
     		nomp.start();
+    		
+    		((TextView)this.findViewById(R.id.textView3)).setTextColor(Color.rgb(255, 0, 0));
+    		if(!qanswered){
+    			wrongans++;	
+    			qanswered = true;
     		           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
@@ -134,14 +182,23 @@ public class Grammar extends Activity {
           DTypeCount ++;
           break;
         }
+    		           if(MainMenu.check == 1){
+    		      			nextStep();
+    		      		}
+    		}
     		} else {
     			yesmp.start();
+    			nextStep();
     		}
     		break;
     	case(R.id.ans4):
     		if(MainMenu.quests[cquest].rans!=4){
-    		wrongans++;	
     		nomp.start();
+    		
+    		((TextView)this.findViewById(R.id.textView4)).setTextColor(Color.rgb(255, 0, 0));
+    		if(!qanswered){
+    			wrongans++;	
+    			qanswered = true;
     		           switch(MainMenu.quests[cquest].type) {
           case 1:
           ATypeCount ++;
@@ -156,15 +213,27 @@ public class Grammar extends Activity {
           DTypeCount ++;
           break;
         }
+    		           if(MainMenu.check == 1){
+    		      			nextStep();
+    		      		}
+    		}
     		} else {
     			yesmp.start();
+    			nextStep();
     		}
     		break;
     	}
+}
+        public void nextStep() {
+        	((TextView)this.findViewById(R.id.textView1)).setTextColor(Color.rgb(0, 0, 0));
+        	((TextView)this.findViewById(R.id.textView2)).setTextColor(Color.rgb(0, 0, 0));
+        	((TextView)this.findViewById(R.id.textView3)).setTextColor(Color.rgb(0, 0, 0));
+        	((TextView)this.findViewById(R.id.textView4)).setTextColor(Color.rgb(0, 0, 0));
+        	qanswered = false;
     	if(cquest==MainMenu.qnum){
     		TextView qt = (TextView) this.findViewById(R.id.Question);
-    		qt.setText("DEBUG: Gluk kakoy-to...");
-    		qt.setTextColor(Color.rgb(0, 255, 0));
+    		qt.setText("КРИТИЧЕСКАЯ ОШИБКА! \n Если вы видите это сообщение больше трех секунд - значит произошел сбой в программе. Пожалуйста, сообщитео нем, чтобы разработчик имел возможность исправить его как можно скорее.");
+    		qt.setTextColor(Color.rgb(255, 0, 0));
     		Intent intik = new Intent(this, GrammarTestResult.class);
     		startActivityForResult(intik, 1);
     	} else {
@@ -186,7 +255,7 @@ public class Grammar extends Activity {
     	}
     }
     public void GoToMainMenu(View poot) {
-    	ButtonSound.start();
+    	MainMenu.ButtonSound.start();
     	mediaPlayer.pause();
 	this.wrongans = 0;
 this.finish();

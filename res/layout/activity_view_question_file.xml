@@ -28,15 +28,6 @@
         android:text="Назад" />
 
     <TextView
-        android:id="@id/detdesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:text="Произошел сбой" />
-
-    <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,5 +35,13 @@
         android:layout_centerHorizontal="true"
         android:text="КРИТИЧЕСКАЯ ОШИБКА"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@id/detdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:text="Произошел сбой" />
 
 </RelativeLayout>

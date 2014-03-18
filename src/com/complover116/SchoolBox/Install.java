@@ -50,7 +50,7 @@ public class Install extends Activity {
 		ListView lv = (ListView)findViewById(R.id.listView1);
 
 		// определяем массив типа String
-		tempnames[0] = "КРИТИЧЕСКАЯ ОШИБКА";
+		tempnames[0] = "КРИТИЧЕСКАЯ ОШИБКА! \n Если вы видите это сообщение больше трех секунд - значит что-то пошло не так. Вернитесь назад, а затем попробуйте еще раз. Если это не помогло - значит, что-то не так с центральной репозиторией, обязательно сообщите об этом!";
 		dl();
 		
 		int i = 0;
@@ -79,6 +79,7 @@ public class Install extends Activity {
 		lv.setAdapter(adapter);
 	}
 	public void back(View view) {
+		MainMenu.ButtonSound.start();
 		this.finish();
 	}
 

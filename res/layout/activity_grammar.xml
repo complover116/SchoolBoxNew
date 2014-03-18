@@ -4,14 +4,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tetridge" />
+
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1" >
+        android:layout_height="wrap_content" >
 
         <RelativeLayout
+            android:id="@+id/RelLay"
             android:layout_width="fill_parent"
-            android:layout_height="461dp" >
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/Question"
@@ -23,29 +29,11 @@
                 android:text="Question" />
 
             <TextView
-                android:id="@+id/wrongansn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/ans1"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="TextView" />
-
-            <TextView
                 android:id="@+id/textView1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/Question"
-                android:layout_toLeftOf="@+id/progress"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -56,7 +44,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/textView3"
                 android:layout_marginTop="20dp"
-                android:layout_toLeftOf="@+id/progress"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -67,7 +54,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/textView2"
                 android:layout_marginTop="20dp"
-                android:layout_toLeftOf="@+id/progress"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -77,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView1"
                 android:layout_marginTop="20dp"
-                android:layout_toLeftOf="@+id/progress"
                 android:text="Medium Text"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -87,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/textView1"
                 android:layout_alignParentRight="true"
-                android:onClick="nextStep"
+                android:onClick="answered"
                 android:text="1" />
 
             <Button
@@ -97,7 +82,7 @@
                 android:layout_alignBaseline="@+id/textView2"
                 android:layout_alignBottom="@+id/textView2"
                 android:layout_alignParentRight="true"
-                android:onClick="nextStep"
+                android:onClick="answered"
                 android:text="2" />
 
             <Button
@@ -106,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/textView4"
                 android:layout_alignParentRight="true"
-                android:onClick="nextStep"
+                android:onClick="answered"
                 android:text="4" />
 
             <Button
@@ -115,19 +100,51 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/textView3"
                 android:layout_alignParentRight="true"
-                android:onClick="nextStep"
+                android:onClick="answered"
                 android:text="3" />
-
-
 
         </RelativeLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/wrongansn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
             <Button
                 android:id="@+id/button1"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
                 android:onClick="GoToMainMenu"
                 android:text="Вернуться в главное меню" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="toggleMusic"
+                android:text="Музыка" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
 </RelativeLayout>

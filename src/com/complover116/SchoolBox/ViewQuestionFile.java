@@ -31,9 +31,11 @@ public class ViewQuestionFile extends Activity {
 		return true;
 	}
 	public void back(View view) {
+		MainMenu.ButtonSound.start();
 		this.finish();
 	}
 	public void download(View view) {
+		MainMenu.ButtonSound.start();
 		Toast.makeText(getApplicationContext(), "Скачиваю файл вопросов...!", Toast.LENGTH_SHORT).show();
     	MainMenu.dltype = 3;
 		File file = new File(getExternalFilesDir( null ).getPath()+"/Questions.scb");

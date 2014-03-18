@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tetridge" />
+
     <TextView
         android:id="@+id/detdesc"
         android:layout_width="wrap_content"
@@ -34,24 +40,24 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<TextView
-        android:id="@+id/Err2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/QR"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
-        android:text="Prcs"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+	    android:id="@+id/Err1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/QR"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="94dp"
+	    android:text="Prcs"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 	<TextView
-        android:id="@+id/Err1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/QR"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="114dp"
-        android:text="Prcs"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+	    android:id="@+id/Err2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/QR"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="114dp"
+	    android:text="Prcs"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 	<TextView
         android:id="@+id/Err3"

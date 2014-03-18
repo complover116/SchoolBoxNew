@@ -40,4 +40,13 @@
 	    android:onClick="configClick"
 	    android:text="Меню закачки вопросов.." />
 
+	<Switch
+	    android:id="@+id/switch2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/button1"
+	    android:layout_centerHorizontal="true"
+	    android:onClick="toggleCheck"
+	    android:text="Показывать ответ" />
+
 	</RelativeLayout>
