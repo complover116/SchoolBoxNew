@@ -153,7 +153,7 @@ public class Install extends Activity {
 			int i = 0;
 			names.clear();
 			while(tempnames[i] != null) {
-				names.add(0, tempnames[i]);
+				names.add(tempnames[i]);
 				i ++;
 			}
 			Log.i("DlStuff", "Conversion complete! N0:" + names.get(0));
@@ -167,10 +167,11 @@ public class Install extends Activity {
 	BroadcastReceiver onComplete=new BroadcastReceiver() {
 	    public void onReceive(Context ctxt, Intent intent) {
 	        // Do Something
-	    	
+
 	    	if(MainMenu.dltype == 2) {
 	    		downloaddialog.dismiss();
 	    		refresh();
+	    		MainMenu.dltype = -1;
 	    	}
 	    }
 	};

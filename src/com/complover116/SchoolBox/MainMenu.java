@@ -26,6 +26,10 @@ import android.widget.VideoView;
 public class MainMenu extends Activity {
 static Question[] quests = new Question[20];
 static int qnum;
+static String type1;
+static String type2;
+static String type3;
+static String type4;
 int uf = 1;
 long myDownloadReference;
 AlertDialog dialog;
@@ -35,7 +39,7 @@ static VideoView VV;
 int fails = 0;
 static AlertDialog downloaddialog;
 long downloadid;
-static byte dltype;
+static byte dltype = -1;
 
 
     @Override
@@ -282,7 +286,7 @@ static byte dltype;
 		}
 		StringBuilder text = new StringBuilder();
         int Qc = 0;
-        int DataLine = 1;
+        int DataLine = -4;
         String CQText = null;
         String CQVar1 = null;
         String CQVar2 = null;
@@ -296,32 +300,39 @@ static byte dltype;
 		    String line;
 
 		    while ((line = br.readLine()) != null) {
+		    	DataLine++;
 		        text.append(line);
 		        text.append('\n');
 		        switch (DataLine) {
+		        case -3:
+		        type1 = line;
+		        break;
+		        case -2:
+		        type2 = line;
+		        break;
+		        case -1:
+		        type3 = line;
+		        break;
+		        case 0:
+		        type4 = line;
+		        break;
 		        case 1:
 		        CQText = line;
-		        DataLine = 2;
 		        break;
 		        case 2:
 			        CQVar1 = line;
-			        DataLine = 3;
 		        break;
 		        case 3:
 			        CQVar2 = line;
-			        DataLine = 4;
 		        break;
 		        case 4:
 			        CQVar3 = line;
-			        DataLine = 5;
 		        break;
 		        case 5:
 			        CQVar4 = line;
-			        DataLine = 6;
 		        break;
 		        case 6:
 	type = line;
-	DataLine = 7;
               if(type.equalsIgnoreCase("1")) {
               typ = 1;
               }
@@ -339,7 +350,7 @@ static byte dltype;
               
             break;
             case 7:
-			        DataLine = 1;
+			        DataLine = 0;
 			        Qc ++;
 			        if(line.equalsIgnoreCase("1")) {
 			        MainMenu.quests[Qc] = new Question(CQText, CQVar1, CQVar2, CQVar3, CQVar4, 1, typ);
@@ -357,7 +368,7 @@ static byte dltype;
 			        }
 		        break;
 		        default:
-		        	Log.e("InRes", "DataLine Failure");
+		        	Log.e("InRes", "DataLine Failure, DataLine is |"+DataLine+"|");
 		        	break;
 		        }
 		    }
@@ -368,7 +379,7 @@ static byte dltype;
 		}
         
         MainMenu.qnum = Qc;
-		Log.d("inres", "Checked resources, "+Qc+" Questions loaded.");
+		Log.d("InRes", "Checked resources, "+Qc+" Questions loaded.");
 		if(quests[1] == null) {
 			return -1;
 		} else {
@@ -385,13 +396,16 @@ static byte dltype;
 	    		downloaddialog.dismiss();
 	    	ResCheck();
 	    	Toast.makeText(getApplicationContext(), "Установка успешна. Можно начинать!", Toast.LENGTH_LONG).show();
+	    	dltype = -1;
 	    	}
 	    	if(dltype == 3) {
 	    	ResCheck();
 	    	Toast.makeText(getApplicationContext(), "Установка успешна. Можно начинать!", Toast.LENGTH_LONG).show();
+	    	dltype = -1;
 	    	}
 	    	if(dltype == 1) {
-	    		downloaddialog.dismiss();
+	    	downloaddialog.dismiss();
+	    	dltype = -1;
 	    	Toast.makeText(getApplicationContext(), "Select \"Install\" when prompted!", Toast.LENGTH_LONG).show();
 	    	 Intent intenty = new Intent(Intent.ACTION_VIEW);
 	    	    intent.setData(Uri.parse("file://"+new File(getExternalFilesDir( null ).getPath()+"/SchoolBox.apk")));

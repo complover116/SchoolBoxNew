@@ -21,13 +21,13 @@ public class GrammarTestResult extends Activity {
     	TextView PRC = (TextView)findViewById(R.id.PRC);
     	PRC.setText(((MainMenu.qnum - Grammar.wrongans)*100/MainMenu.qnum)+"%");
 		TextView err1 = (TextView)findViewById(R.id.Err1);
-		err1.setText("Орфоэпические ошибки:" + Grammar.ATypeCount);
+		err1.setText(MainMenu.type1+":" + Grammar.ATypeCount);
 		TextView err2 = (TextView)findViewById(R.id.Err2);
-		err2.setText("Словообразовательные ошибки:" + Grammar.BTypeCount);
+		err2.setText(MainMenu.type2+":" + Grammar.BTypeCount);
 		TextView err3 = (TextView)findViewById(R.id.Err3);
-		err3.setText("Орфографические ошибки:" + Grammar.CTypeCount);
+		err3.setText(MainMenu.type3+":" + Grammar.CTypeCount);
 		TextView err4 = (TextView)findViewById(R.id.Err4);
-		err4.setText("Синтаксические ошибки:" + Grammar.DTypeCount);
+		err4.setText(MainMenu.type4+":" + Grammar.DTypeCount);
   }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

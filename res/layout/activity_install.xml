@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button1"
         android:layout_alignLeft="@+id/button1" >
-
     </ListView>
 
 </RelativeLayout>
