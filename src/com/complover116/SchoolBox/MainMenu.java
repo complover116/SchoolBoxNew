@@ -111,7 +111,7 @@ static byte check = 1;
 	AlertDialog dialogy = builder.create();
 	dialogy.show();
 	downloaddialog = dialogy;
-	   String url = "https://dl.dropboxusercontent.com/s/883c70y8dssdxmo/Schoolbox.apk?dl=1&token_hash=AAEksOhJv2FKZHrrHxQwfrgdm98extYxjHDbNSpCw3HsSg";
+	   String url = "https://dl.dropboxusercontent.com/s/sdx1mcer9fqt1xe/Russian-yandex-2014.txt?dl=1&token_hash=AAFM_4v4cNNnJLRAQtzXBuCScPKIxCYOWfjHILoO2LWX2Q";
 	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 	   request.setDescription("SchoolBox update file");
 	   request.setTitle("ScholBox update");
@@ -140,7 +140,7 @@ static byte check = 1;
     		// Add the buttons
     		builder.setPositiveButton("Выбрать файл...", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
-    		               // User clicked OK button
+    		               confQuestions();
     		           }
     		       });
     		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
@@ -148,41 +148,6 @@ static byte check = 1;
     		               // User cancelled the dialog
     		           }
     		       });
-    		builder.setNeutralButton("Скачать тестовый файл", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   if(isNetworkAvailable()) {
-			       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
-			    		builder.setMessage("Скачиваю файл вопросов...")
-			    	       .setTitle("Пожалуйста, подождите...");
-			    		builder.setCancelable(false);
-			    		AlertDialog dialogy = builder.create();
-			    		dialogy.show();
-			    		File file = new File(getExternalFilesDir( null ).getPath()+"/Questions.scb");
-			    		file.delete();
-			        	dltype = 0;
-			    		downloaddialog = dialogy;
-			        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
-			        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-			        	   request.setDescription("SchoolBox default questions file");
-			        	   request.setTitle("ScholBox questions");
-			        	   // in order for this if to run, you must use the android 3.2 to compile your app
-			        	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			        	       request.allowScanningByMediaScanner();
-			        	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-			        	   }
-			        	   
-			        	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/Questions.scb"));
-			        	   
-			        	   request.setDestinationUri(destination);
-
-			        	   // get download service and enqueue file
-			        	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-			        	   manager.enqueue(request);
-			        	   
-			               // User cancelled the dialog
-			           }
-		           }
-		       });
     		// Set other dialog properties
 
     		// Create the AlertDialog
@@ -217,7 +182,7 @@ static byte check = 1;
     		// Add the buttons
     		builder.setPositiveButton("Выбрать файл...", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
-    		               // User clicked OK button
+    		        	   confQuestions();
     		           }
     		       });
     		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
@@ -226,39 +191,6 @@ static byte check = 1;
     		        	   fails = fails - 1;
     		           }
     		       });
-    		builder.setNeutralButton("Скачать тестовый файл", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   if(isNetworkAvailable()) {
-		       		AlertDialog.Builder builder = new AlertDialog.Builder(self);
-		    		builder.setMessage("Скачиваю файл вопросов...")
-		    	       .setTitle("Пожалуйста, подождите...");
-		    		builder.setCancelable(false);
-		    		AlertDialog dialogy = builder.create();
-		    		dialogy.show();
-		        	dltype = 0;
-		    		downloaddialog = dialogy;
-		        	   String url = "https://dl.dropboxusercontent.com/s/264e5lte2cxpxy3/Question.txt?dl=1&token_hash=AAEG1_pdHNZ1cQMfrmyVljsTliw_Ft4R6JUsmIPH7cYxog";
-		        	   DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-		        	   request.setDescription("SchoolBox default questions file");
-		        	   request.setTitle("ScholBox questions");
-		        	   // in order for this if to run, you must use the android 3.2 to compile your app
-		        	   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-		        	       request.allowScanningByMediaScanner();
-		        	       request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-		        	   }
-		        	   
-		        	   Uri destination = Uri.fromFile(new File(getExternalFilesDir( null ).getPath()+"/Questions.scb"));
-		        	   
-		        	   request.setDestinationUri(destination);
-
-		        	   // get download service and enqueue file
-		        	   DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-		        	   manager.enqueue(request);
-		        	   
-		               // User cancelled the dialog
-		           }
-		           }
-		       });
     		// Set other dialog properties
     		
     		// Create the AlertDialog
